@@ -10,8 +10,8 @@ class SyncSMS:
     self.secret_field = 'secret'
     self.fields = ['from', 'message', self.secret_field, 'sent_timestamp']
     self.config = Config.Instance()
-    
-    
+
+
   def process_request(self, data):
     """Main method used for processing a request"""
     fields, status, message = self.parse_post_request(data)
@@ -20,7 +20,7 @@ class SyncSMS:
         status = False
         message = "The secrets do not match"
     return fields, status, message
-    
+
   def check_secret(self, data):
     return data[self.secret_field] == self.config.get('syncsms', self.secret_field)
 
